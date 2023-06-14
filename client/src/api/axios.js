@@ -1,7 +1,8 @@
 import axios from "axios";
+import { API_URL } from "../config";
 
 const instance = axios.create({
-  baseURL: "https://crud-mern-stack-production-846f.up.railway.app/api",
+  baseURL: API_URL,
   withCredentials: true
 });
 

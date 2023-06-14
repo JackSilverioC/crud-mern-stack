@@ -5,6 +5,7 @@ import cors from "cors";
 
 import authRoutes from "./routes/auth.routes.js";
 import tasksRoutes from "./routes/tasks.routes.js";
+import { FRONTEND_URL } from "./config.js";
 
 import { dirname, join } from "path";
 import { fileURLToPath } from "url";
@@ -15,7 +16,7 @@ const app = express();
 
 app.use(
   cors({
-    origin: "http://localhost:5173",
+    origin: FRONTEND_URL,
     credentials: true
   })
 );
