@@ -33,7 +33,7 @@
     "tailwindcss": "^3.3.2",
     "vite": "^4.3.9"
   },
-  "overrides": {
+  "resolutions": {
     "react-error-overlay": "6.0.9"
   }
 }
