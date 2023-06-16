@@ -114,27 +114,33 @@ export const profile = async (req, res) => {
 export const verifyToken = async (req, res) => {
   const { token } = req.cookies;
 
-  if (!token)
-    return res.status(401).json({
-      error: ["No autorizado"]
-    });
-
-  jwt.verify(token, TOKEN_SECRET, async (err, decoded) => {
-    if (err)
+  try {
+    if (!token)
       return res.status(401).json({
         error: ["No autorizado"]
       });
 
-    const userFound = await User.findById(decoded.id);
-    if (!userFound)
-      return res.status(401).json({
-        error: ["No autorizado"]
-      });
+    jwt.verify(token, TOKEN_SECRET, async (err, decoded) => {
+      if (err)
+        return res.status(401).json({
+          error: ["No autorizado"]
+        });
 
-    return res.json({
-      id: userFound._id,
-      username: userFound.username,
-      email: userFound.email
+      const userFound = await User.findById(decoded.id);
+      if (!userFound)
+        return res.status(401).json({
+          error: ["No autorizado"]
+        });
+
+      return res.json({
+        id: userFound._id,
+        username: userFound.username,
+        email: userFound.email
+      });
     });
-  });
+  } catch (error) {
+    return res.status(500).json({
+      message: error.message
+    });
+  }
 };
