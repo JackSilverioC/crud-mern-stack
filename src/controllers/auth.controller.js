@@ -76,10 +76,7 @@ export const login = async (req, res) => {
 
     res.cookie("token", token, {
       httpOnly: true,
-      domain:
-        process.env.NODE_ENV === "development"
-          ? "http//localhost:5173"
-          : "https://crud-mern-stack.vercel.app"
+      domain: "https://crud-mern-stack.vercel.app"
     });
 
     res.json({
@@ -99,10 +96,7 @@ export const login = async (req, res) => {
 export const logout = (req, res) => {
   res.cookie("token", "", {
     httpOnly: true,
-    domain:
-      process.env.NODE_ENV === "development"
-        ? "http//localhost:5173"
-        : "https://crud-mern-stack.vercel.app",
+    domain: "https://crud-mern-stack.vercel.app",
     expires: new Date(0)
   });
   return res.sendStatus(200);
