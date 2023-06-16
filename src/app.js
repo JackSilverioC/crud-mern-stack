@@ -16,7 +16,7 @@ const app = express();
 
 app.use(
   cors({
-    origin: "https://crud-mern-stack.vercel.app",
+    origin: "https://crud-mern-jack.netlify.app",
     credentials: true
   })
 );
