@@ -20,7 +20,8 @@ const corsOptions = {
     FRONTEND_URL
     // your origins here
   ],
-  credentials: true
+  credentials: true,
+  exposedHeaders: ["set-cookie"]
 };
 
 app.use(cors(corsOptions));
