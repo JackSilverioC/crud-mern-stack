@@ -4,8 +4,7 @@ config();
 
 export const TOKEN_SECRET = process.env.TOKEN_SECRET || "some secret key";
 
-export const MONGODB_URI =
-  process.env.MONGODB_URI || "mongodb://localhost/merndb";
+export const MONGODB_URI = "mongodb://localhost/merndb";
 
 export const PORT = process.env.PORT || 3000;
 
