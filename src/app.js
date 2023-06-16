@@ -17,12 +17,10 @@ const app = express();
 const corsOptions = {
   origin: [
     "http://localhost:3000",
-    FRONTEND_URL,
-    "*"
+    FRONTEND_URL
     // your origins here
   ],
-  credentials: true,
-  exposedHeaders: ["set-cookie"]
+  credentials: true
 };
 
 app.use(cors(corsOptions));
