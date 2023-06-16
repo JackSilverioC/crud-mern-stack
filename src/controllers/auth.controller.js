@@ -29,9 +29,11 @@ export const register = async (req, res) => {
     });
 
     res.cookie("token", token, {
-      httpOnly: process.env.NODE_ENV !== "development",
-      secure: true,
-      sameSite: "none"
+      httpOnly: true,
+      domain:
+        process.env.NODE_ENV === "development"
+          ? "http//localhost:5173"
+          : "https://crud-mern-stack.vercel.app"
     });
 
     res.json({
@@ -73,9 +75,11 @@ export const login = async (req, res) => {
     });
 
     res.cookie("token", token, {
-      httpOnly: process.env.NODE_ENV !== "development",
-      secure: true,
-      sameSite: "none"
+      httpOnly: true,
+      domain:
+        process.env.NODE_ENV === "development"
+          ? "http//localhost:5173"
+          : "https://crud-mern-stack.vercel.app"
     });
 
     res.json({
@@ -95,7 +99,10 @@ export const login = async (req, res) => {
 export const logout = (req, res) => {
   res.cookie("token", "", {
     httpOnly: true,
-    secure: true,
+    domain:
+      process.env.NODE_ENV === "development"
+        ? "http//localhost:5173"
+        : "https://crud-mern-stack.vercel.app",
     expires: new Date(0)
   });
   return res.sendStatus(200);
