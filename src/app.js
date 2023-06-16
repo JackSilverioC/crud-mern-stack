@@ -16,7 +16,7 @@ const app = express();
 
 app.use(
   cors({
-    origin: "*",
+    origin: FRONTEND_URL,
     credentials: true
   })
 );
