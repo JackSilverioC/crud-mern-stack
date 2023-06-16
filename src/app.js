@@ -16,7 +16,7 @@ const app = express();
 
 app.use(
   cors({
-    origin: FRONTEND_URL,
+    origin: "http://localhost:5173",
     credentials: true
   })
 );
@@ -27,16 +27,16 @@ app.use(cookieParser());
 app.use("/api", authRoutes);
 app.use("/api", tasksRoutes);
 
-if (process.env.NODE_ENV === "production") {
-  const path = await import("path");
-  app.use(express.static("client/dist"));
+// if (process.env.NODE_ENV === "production") {
+//   const path = await import("path");
+//   app.use(express.static("client/dist"));
 
-  app.get("*", (req, res) => {
-    console.log(path.resolve("client", "dist", "index.html"));
-    res.sendFile(path.resolve("client", "dist", "index.html"));
-  });
-}
+//   app.get("*", (req, res) => {
+//     console.log(path.resolve("client", "dist", "index.html"));
+//     res.sendFile(path.resolve("client", "dist", "index.html"));
+//   });
+// }
 
-// app.use(express.static(join(__dirname, "../client/dist")));
+app.use(express.static(join(__dirname, "../client/dist")));
 
 export default app;
