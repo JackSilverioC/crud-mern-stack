@@ -20,11 +20,13 @@ export const UseTasks = () => {
 
 export function TaskProvider({ children }) {
   const [tasks, setTasks] = useState([]);
+  const [shouldRefresh, setShouldRefresh] = useState(false);
 
   const getTasks = async () => {
     try {
       const res = await getTasksRequest();
       setTasks(res.data);
+      setShouldRefresh(true);
     } catch (error) {
       console.log(error);
     }
@@ -72,7 +74,8 @@ export function TaskProvider({ children }) {
         getTasks,
         deleteTask,
         getTask,
-        updateTask
+        updateTask,
+        shouldRefresh
       }}
     >
       {children}
