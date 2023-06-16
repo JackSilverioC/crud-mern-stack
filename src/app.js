@@ -16,7 +16,7 @@ const app = express();
 
 app.use(
   cors({
-    origin: "https://crud-mern-jack.netlify.app",
+    origin: FRONTEND_URL,
     credentials: true
   })
 );
