@@ -69,8 +69,11 @@ export const login = async (req, res) => {
     });
 
     res.cookie("token", token, {
-      samesite: "none",
-      secure: true
+      sameSite: "None",
+      secure: true,
+      httpOnly: true,
+      expires: new Date(Date.now() + 86400000), // Expires in 1 day (in milliseconds)
+      path: "/"
     });
 
     res.json({
@@ -88,9 +91,7 @@ export const login = async (req, res) => {
 };
 
 export const logout = (req, res) => {
-  res.cookie("token", "", {
-    expires: new Date(0)
-  });
+  res.cookie("token", "");
   return res.sendStatus(200);
 };
 
