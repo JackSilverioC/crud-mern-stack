@@ -14,12 +14,17 @@ const __dirname = dirname(fileURLToPath(import.meta.url));
 
 const app = express();
 
-app.use(
-  cors({
-    origin: FRONTEND_URL,
-    credentials: true
-  })
-);
+const corsOptions = {
+  origin: [
+    "http://localhost:3000",
+    FRONTEND_URL
+    // your origins here
+  ],
+  credentials: true,
+  exposedHeaders: ["set-cookie"]
+};
+
+app.use(cors(corsOptions));
 app.use(morgan("dev"));
 app.use(express.json());
 app.use(cookieParser());
@@ -27,16 +32,20 @@ app.use(cookieParser());
 app.use("/api", authRoutes);
 app.use("/api", tasksRoutes);
 
-if (process.env.NODE_ENV === "production") {
-  const path = await import("path");
-  app.use(express.static("client/dist"));
+// if (process.env.NODE_ENV === "production") {
+//   app.use(express.static("client/dist"));
 
-  app.get("*", (req, res) => {
-    console.log(path.resolve("client", "dist", "index.html"));
-    res.sendFile(path.resolve("client", "dist", "index.html"));
-  });
-}
+//   app.get("*", (req, res) => {
+//     console.log(path.resolve("client", "dist", "index.html"));
+//     res.sendFile(path.resolve("client", "dist", "index.html"));
+//   });
+// }
+const path = await import("path");
+app.use(express.static(join(__dirname, "../client/dist")));
 
-// app.use(express.static(join(__dirname, "../client/dist")));
+app.get("*", (req, res) => {
+  console.log(path.resolve("client", "dist", "index.html"));
+  res.sendFile(path.resolve("client", "dist", "index.html"));
+});
 
 export default app;

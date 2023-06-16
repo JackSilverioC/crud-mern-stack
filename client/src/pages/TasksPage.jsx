@@ -7,7 +7,7 @@ function TasksPage() {
 
   useEffect(() => {
     getTasks();
-  }, []);
+  }, [getTasks]);
 
   if (tasks.length === 0) return <h1>No hay tareas</h1>;
 
