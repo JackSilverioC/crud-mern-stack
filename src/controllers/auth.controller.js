@@ -28,7 +28,11 @@ export const register = async (req, res) => {
       id: userSaved._id
     });
 
-    res.cookie("token", token);
+    res.cookie("token", token, {
+      httpOnly: process.env.NODE_ENV !== "development",
+      secure: true,
+      sameSite: "none"
+    });
 
     res.json({
       id: userSaved._id,
@@ -68,7 +72,11 @@ export const login = async (req, res) => {
       id: userFound._id
     });
 
-    res.cookie("token", token);
+    res.cookie("token", token, {
+      httpOnly: process.env.NODE_ENV !== "development",
+      secure: true,
+      sameSite: "none"
+    });
 
     res.json({
       id: userFound._id,
@@ -86,6 +94,8 @@ export const login = async (req, res) => {
 
 export const logout = (req, res) => {
   res.cookie("token", "", {
+    httpOnly: true,
+    secure: true,
     expires: new Date(0)
   });
   return res.sendStatus(200);
